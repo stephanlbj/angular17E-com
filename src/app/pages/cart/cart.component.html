@@ -1,0 +1,52 @@
+
+   <div class="flex flex-col sm:flex sm:flex-row  sm:space-x-3 w-full mt-20">
+
+        <div class="flex justify-start fixed top-28 mt-8 left-8">
+               <button (click)="goBack()"class=" text-2xl   ">🔙</button>
+       </div>
+ 
+
+         <div  *ngIf="getCartLength() > 0" class=" flex-1  mx-4 sm:mx-0 mt-8 sm:mt-0 mb-20">
+            <div class="  flex flex-col  justify-center space-y-4 shadow-2
+                border border-gray-300 rounded-md p-4 w-10/12 sm:w-8/12 md:w-6/12 lg:w-5/12 mx-auto">
+                
+                
+    <div class="card">
+    <p-dataView #dv [value]="cartList">
+        <ng-template pTemplate="list" let-products>
+            <div class="grid grid-nogutter">
+                <div class="w-full" *ngFor="let item of products; let first = first">
+                    <div class="flex flex-column align-items-center justify-center gap-4 p-4" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                       
+
+                        <div class="w-full flex flex-col items-center justify-center space-y-3
+                        sm:space-y-0 sm:flex sm:flex-row sm:items-center sm:space-x-3 sm:justify-between p-4" >
+
+                        <img [src]="item.img" [alt]="item.name" 
+                        class="w-10 shadow-2 flex-shrink-0 border-round" />
+
+                        <div class="w-full flex flex-col items-center justify-center 
+                         items-start sm:flex sm:flex-row  sm:flex-1 sm:justify-between gap-4">
+                      
+                            <div class="text-2xl font-bold text-900 text-center sm:flex-1 sm:flex 
+                           sm:justify-center sm:text-xl">{{ item.name }}</div>
+
+                            <div class="flex items-center space-x-3 sm:flex-col sm:items-center sm:justify-end gap-3">
+                                <span class="text-xl font-semibold">{{ 'Qty:' + item.qty }}</span>
+                                <p class="text-red-500 text-xl"> {{ '$' + getPricePerItem(item)}}</p>
+                             </div>
+                        </div>
+            </div>
+            </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>
+
+                  <button 
+                  (click)="checkOut()"
+                  class="bg-blue-500 text-white px-2 py-1 rounded-md">Checkout</button>
+                </div>
+         </div>
+</div>

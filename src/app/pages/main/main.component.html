@@ -1,0 +1,33 @@
+ @if (isLoading) {
+        <div class="text-2xl flex justify-center items-center mt-44 ">
+              <p class="text-center">Loading...</p>
+        </div>
+    }
+    @else {
+      <div class="w-full p-10">
+         <h1 class="text-center text-[18px] my-10 font-bold text-gray-800">Angular 17 Application using signals + new Control flow +  Rxjs + Tailwin CSS + google authentication</h1>
+         
+         <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
+           
+           
+           @for(product of products; track product.id){
+            
+             <app-product 
+             [product]="product">
+            </app-product>
+
+           }@empty {
+              <div class="flex items-center justify-center
+              h-screen">
+              <p class="text-center text-xl">No data available</p>
+           </div>
+           }
+        
+        </div>
+     </div>
+    }
+  
+
+ 
+
+

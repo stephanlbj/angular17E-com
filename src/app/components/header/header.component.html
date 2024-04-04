@@ -1,0 +1,100 @@
+
+
+<section class="relative">
+  <header class="z-20 bg-gray-200 p-4 shadow-md w-full">
+
+    <nav class="flex items-center  w-full justify-between">
+
+      <a [routerLink]="''" class="flex items-center space-x-3">
+       <mat-icon aria-hidden="false"
+          class="text-blue-500"
+          fontIcon="home"></mat-icon>
+      </a>
+    
+      
+
+
+    <div class="flex items-center space-x-3">
+     
+      @if(receivedUser() != null){
+        <p class="text-[14px] font-bold h-3 w-3  flex items-center 
+        justify-center rounded-full p-5 border border-blue-300">
+         {{receivedUser()?.name?.slice(0, 2)?.toUpperCase()}}</p>
+       }
+
+        @if (cartCount() > 0) {
+          <div class="relative">
+
+            
+           
+           <p (click)="showCart()" class=" cursor-pointer flex 
+           items-center space-x-4 border border-gray-300 px-3 py-1
+            ">
+            <mat-icon class="text-red-500">shop</mat-icon>
+              <span class="text-[14px]">{{cartCount()}}</span></p>
+         
+
+
+          </div>
+         }
+    </div>
+     
+
+    </nav>
+
+     
+  </header >
+
+  @if (isCartVisible) {
+    <section class="absolute z-30 bg-gray-100 top-full -mt-4   
+right-0 mr-4 w-fit px-4 rounded-md 
+border border-gray-400">
+      <div class="p-4">
+ 
+
+        @if(cartService.cartItems().length>0){
+          <div class="flex flex-col items-center space-y-4  justify-center w-full">
+              @for (item of cartService.cartItems().slice(-2).reverse(); track item.id) {
+                <div class="flex items-center space-x-4 justify-between w-full p-2">
+                  <img
+                [src]="item.img"
+                 
+                style="object-fit: contain; width: 70px;  height: 70px;"
+                alt="product-image"
+                />
+
+
+                <div class="flex flex-col items-start  flex-1" >
+                   <p class="text-center">{{item.name}}</p>
+                   <p class="text-center">{{item.qty}} * {{item.price}}</p>
+                </div>
+                </div>
+              }
+          </div>
+        }
+
+        <!-- totalPrice -->
+
+        <div class="flex items-center justify-between w-full my-6">
+          <p class="font-semibold">Total:</p>
+         <p class="text-red-500">{{ '$' + totalPrice()}}</p>
+        </div>
+       
+        <!-- cart and checkout button -->
+        <div class="flex items-center justify-center space-x-3  w-full">
+
+          <app-checkout-btn
+          [label]="'View Cart'" 
+          [color]="' bg-black text-white'" 
+          (clickEvent)="viewCart()"
+          ></app-checkout-btn>
+
+           
+ 
+        </div>
+
+      </div>
+</section>
+  }
+
+</section>
